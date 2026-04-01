@@ -1,0 +1,236 @@
+.catalog-page {
+  min-height: calc(100vh - 80px);
+  padding: 2rem 0;
+  background-color: var(--light-cream);
+}
+
+/* Hero Section */
+.catalog-hero {
+  text-align: center;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--dark-navy) 0%, #2D3E50 100%);
+  color: var(--white);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.catalog-hero h1 {
+  color: var(--primary-gold);
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.catalog-hero p {
+  color: var(--light-cream);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Filters Section */
+.catalog-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-navy);
+  font-size: 0.9rem;
+}
+
+.search-box {
+  grid-column: 1 / -1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--light-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 3px rgba(196, 167, 71, 0.1);
+}
+
+.filter-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--light-gray);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.filter-select:hover {
+  border-color: var(--primary-gold);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 3px rgba(196, 167, 71, 0.1);
+}
+
+/* Results Header */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(196, 167, 71, 0.05);
+  border-radius: 8px;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.results-count {
+  color: var(--dark-gray);
+  font-weight: 500;
+  margin: 0;
+}
+
+.results-count strong {
+  color: var(--primary-gold);
+  font-weight: 700;
+}
+
+.btn-clear {
+  background: transparent;
+  color: var(--primary-gold);
+  border: 2px solid var(--primary-gold);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-clear:hover {
+  background-color: var(--primary-gold);
+  color: var(--dark-navy);
+}
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 4rem 2rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  color: var(--dark-navy);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: var(--dark-gray);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--dark-gray);
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .catalog-filters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-box {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-page {
+    padding: 1rem 0;
+  }
+
+  .catalog-hero {
+    padding: 2rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .catalog-hero h1 {
+    font-size: 2rem;
+  }
+
+  .catalog-hero p {
+    font-size: 1rem;
+  }
+
+  .catalog-filters {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .empty-state {
+    padding: 3rem 1rem;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .catalog-hero p {
+    font-size: 0.95rem;
+  }
+
+  .results-count {
+    font-size: 0.9rem;
+  }
+
+  .btn-clear {
+    width: 100%;
+  }
+}

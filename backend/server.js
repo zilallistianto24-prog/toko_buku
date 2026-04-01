@@ -96,7 +96,6 @@ app.post('/api/books', verifyToken, async (req, res) => {
         stock: parseInt(stock) || 0,
         category,
         image_url,
-        user_id: req.userId,
         created_at: new Date().toISOString()
       }])
       .select();
@@ -115,16 +114,12 @@ app.put('/api/books/:id', verifyToken, async (req, res) => {
 
     const { data: book, error: fetchError } = await supabase
       .from('books')
-      .select('user_id')
+      .select('id, title, description, author, price, stock, image_url, category, created_at, updated_at')
       .eq('id', req.params.id)
       .single();
 
     if (fetchError || !book) {
       return res.status(404).json({ error: 'Buku tidak ditemukan' });
-    }
-
-    if (book.user_id !== req.userId) {
-      return res.status(403).json({ error: 'Anda tidak berhak mengubah buku ini' });
     }
 
     const { data, error } = await supabase
@@ -154,16 +149,12 @@ app.delete('/api/books/:id', verifyToken, async (req, res) => {
   try {
     const { data: book, error: fetchError } = await supabase
       .from('books')
-      .select('user_id')
+      .select('user_id, id')
       .eq('id', req.params.id)
       .single();
 
     if (fetchError || !book) {
       return res.status(404).json({ error: 'Buku tidak ditemukan' });
-    }
-
-    if (book.user_id !== req.userId) {
-      return res.status(403).json({ error: 'Anda tidak berhak menghapus buku ini' });
     }
 
     const { error } = await supabase
@@ -192,7 +183,7 @@ app.post('/api/auth/register', async (req, res) => {
     // Check jika user sudah ada
     const { data: existingUser } = await supabase
       .from('users')
-      .select('*')
+      .select('id, email')
       .eq('email', email)
       .single();
 
@@ -211,8 +202,16 @@ app.post('/api/auth/register', async (req, res) => {
 
     if (error) throw error;
 
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: data[0].id, email: data[0].email },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRE }
+    );
+
     res.status(201).json({ 
       message: 'Pendaftaran berhasil', 
+      token,
       user: { id: data[0].id, email: data[0].email, name: data[0].name }
     });
   } catch (error) {
@@ -231,7 +230,7 @@ app.post('/api/auth/login', async (req, res) => {
 
     const { data: user, error } = await supabase
       .from('users')
-      .select('*')
+      .select('id, email, password, name, avatar_url')
       .eq('email', email)
       .single();
 

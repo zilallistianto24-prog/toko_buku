@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Catalog from './pages/Catalog';
+import About from './pages/About';
 import './App.css';
 
 function App() {
@@ -44,12 +46,14 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="App">
         <Navbar user={user} onLogout={handleLogout} />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home user={user} />} />
+            <Route path="/katalog" element={<Catalog user={user} />} />
+            <Route path="/tentang" element={<About />} />
             <Route
               path="/login"
               element={user ? <Navigate to="/" /> : <Login onLogin={handleLogin} />}

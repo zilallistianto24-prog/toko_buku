@@ -107,7 +107,7 @@ toko_buku/
 
 ### Components
 - ✅ Responsive navbar dengan search & user menu
-- ✅ Product grid dengan hover effects
+- ✅ Book grid dengan hover effects
 - ✅ Modal form untuk tambah/edit buku
 - ✅ Auth forms dengan validation
 - ✅ Alert messages (success, error, warning)
